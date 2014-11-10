@@ -1,0 +1,32 @@
+<% provide(:title, 'Infos') %>
+    <div class="row">
+      <aside class="span4">
+        <section>
+          <h1>
+            <%= @info.title %>
+            <br>
+            <%= @info.content %>
+            <br>
+            <% if @info.commentstates.any?%>
+            <%= render @commentstates %>
+            <%= "#{@m} people like it" %>
+            <br>
+            <%= "#{@n} people dislike it" %>
+            <br>
+            <% end %>
+            <%= render 'shared/commentstate_form' %>
+          </h1>
+        </section>
+        
+      </aside>
+      <div class="span8">
+                  <ol class="center">
+            
+          </ol>
+      </div>
+      <gg><%= render @comments %><br>
+      <%= will_paginate @comments%></gg>
+      <p>
+            <%= render 'shared/comment_form' %>
+          </p>
+    </div> 

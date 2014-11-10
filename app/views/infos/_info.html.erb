@@ -1,0 +1,10 @@
+<p>
+      <span class="title"><%= link_to "#{info.title}", info,method: :get,title: info.title %></span>
+      
+
+      <% if current_user?(info.user) %>
+        <%= link_to "delete", info, method: :delete,
+                                         data: { confirm: "You sure?" },
+                                         title: info.content %>
+      <% end %>
+</p>

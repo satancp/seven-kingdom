@@ -1,0 +1,30 @@
+<% provide(:title, 'Requests') %>
+    <div class="row">
+      <aside class="span4">
+        <section>
+          <h1><% if @friendship.any? %>
+          <% @x = 0 %>
+            <% @y = @friendship.size - 1 %>
+            <br>
+            <% for @x in 0..@y %>
+      <% @z = @friendship[@x].personone %><% @m = @friendship[@x].persontwo %>
+      <% @as = Friendship.where(:personone => @z,:persontwo => @m) %>
+      <% @ad = Friendship.where(:personone => @m,:persontwo => @z) %>
+      <% if @as == [] %>
+      <%= link_to "#{User.find(@m).name}  ", User.find(@m), method: :get%>
+          <%= link_to "delete", User.find(@m), method: :delete%><% @sendperson = User.find(@z).id%><%= render 'shared/chat_form'%><% else %><%= link_to "#{User.find(@z).name}  ", User.find(@z), method: :get%><%= link_to "delete", User.find(@z), method: :delete%><% @sendperson = User.find(@m).id%><%= render 'shared/chatanother_form'%><% end %>
+
+      <% @x = @x + 1 %>
+      <%end%>
+          <% else %>
+            <p><%= "Don't be shy~" %><br><%= "Try to have a friend~"%></p><% end %>
+          </h1>
+
+        </section>
+        
+      </aside>
+      <div class="span8">
+
+      </div>
+
+    </div> 

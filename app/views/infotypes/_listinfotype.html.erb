@@ -1,0 +1,9 @@
+<div>
+
+    <% for x in 0..@y %>
+      <span class="content"><%= link_to "#{@infotypes[@x].name}", @infotypes[@x],method: :get,name: @infotypes[@x].name%>
+       </span>
+      <% @x = @x + 1 %>
+      <%end%>
+      
+</div>

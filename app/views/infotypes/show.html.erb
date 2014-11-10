@@ -1,0 +1,38 @@
+<% provide(:title, @infotype.name) %>
+<% if signed_in? %>
+<% if user_power? %>
+      <div class="center hero-unit">
+      <h1><%=@infotype.name%></h1>
+      <h2><%= link_to "delete", @infotype, method: :delete,
+                                         data: { confirm: "You sure?" },
+                                         name: @infotype.name %></h2>
+<br>
+<p class="center">
+            <%= render @infos %>
+          </p><br><%= will_paginate @infos%>
+<p>
+            <%= render 'shared/info_form' %>
+          </p>
+
+          <br>
+          
+      </div>
+      
+
+    <% else %>
+        <div class="center hero-unit">
+        <h1><%=@infotype.name%></h1>
+       
+            <%= render @infos %>
+        
+     <%= will_paginate @infos%></div>
+      <% end %>
+
+      <% else %>
+      <div class="center hero-unit">
+        <h1><%=@infotype.name%></h1>
+       
+            <%= render @infos %>
+          
+      <%= will_paginate @infos%></div>
+      <% end %>

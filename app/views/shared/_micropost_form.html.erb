@@ -1,0 +1,24 @@
+<%= form_for(Micropost.new) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="field">
+        <%= f.text_area :content, size: '20x5',placeholder: "Compose new micropost..." %>
+        <br>
+        <%= f.label :tag %>
+        <br>
+        <%=select_tag 'tag[]', options_for_select(Tag.all.collect {|t| [t.name, t.id]}), :multiple => true, :size => 5%>
+        <br>
+      </div>
+      <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+    <% end %>
+    <% if signed_in? %>
+<% if user_power? %>
+<br>
+<%= form_for(Tag.new) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="field">
+        <%= f.text_field :name,placeholder: "Compose new tag..." %>
+      </div>
+      <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+    <% end %>
+    <% end %>
+    <% end %>

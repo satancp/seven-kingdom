@@ -1,0 +1,11 @@
+<%= form_for(Chat.new) do |f| %>
+          
+          <%= f.label :content %>
+          <br>
+          <%= f.text_field :content %>
+          <br>
+          <%= f.hidden_field :sendperson, :value => @sendperson %>
+          <%= f.hidden_field :friendship_id, :value => @as[0].id %>
+          <br>
+          <%= f.submit "Send", class: "btn btn-large btn-primary" %>
+        <% end %>

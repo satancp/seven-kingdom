@@ -1,0 +1,28 @@
+<% provide(:title, 'Messages') %>
+    <div class="row">
+      <aside class="span4">
+        <section>
+          <h1><% if @chat.any? %>
+          <% @x = 0 %>
+            <% @y = @chat.size - 1 %>
+            <% @fgh = 0 %>
+            <br>
+            <% for @x in 0..@y %>
+      <p><% @z = @chat[@x].friendship_id %><% @m = Friendship.find(@z) %><% @hh = @m.personone %><% @hj = @m.persontwo %><% @hk = User.find(@hh) %><% @hl = User.find(@hj) %>
+      <% if @chat[@x].sendperson != current_user.id %><% @fgh = @fgh + 1 %><% if @hh == current_user.id %><%= link_to "#{@hl.name}  ", @chat[@x], method: :get%><br><%= "#{@chat[@x].created_at}  "%><%= link_to "delete", @chat[@x], method: :delete%><% else %><%= link_to "#{@hk.name}  ", @chat[@x], method: :get%><br><%= "#{@chat[@x].created_at}  "%><%= link_to "delete", @chat[@x], method: :delete%><% end %><% end %>
+      
+      <% @x = @x + 1 %>
+      <%end%></p><% if @fgh == 0 %>
+      <p><%= "You have no message." %></p><% end %>
+          <% else %>
+            <p><%= "You have no message." %></p><% end %>
+          </h1>
+
+        </section>
+        
+      </aside>
+      <div class="span8">
+
+      </div>
+
+    </div> 

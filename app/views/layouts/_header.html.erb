@@ -1,0 +1,47 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= link_to "PlayMore", root_path, id: "logo" %>
+          <nav>
+            <ul class="nav pull-right">
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "Help", help_path %></li>
+                   <!-- Is user logged in? -->
+                <% if signed_in? %>
+                <li id="fat-menu" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Account <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Profile", current_user %></li>
+                    <li><%= link_to "Requests", states_path(current_user) %></li>
+                    <li><%= link_to "Friends", friendships_path(current_user) %></li>
+                    <li><%= link_to "Messages", chats_path(current_user) %></li>
+                    <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                    <li class="divider"></li>
+                    <li>
+                      <%= link_to "Sign out", signout_path, method: "delete" %>
+                    </li>
+                  </ul>
+                </li>
+                <% else %> 
+                <li><%= link_to "Sign in", signin_path %></li>
+                <% end %>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="navbar-inner">
+        <nav>
+          <ull class="nav center">
+            <%@infotypes = Infotype.all%>
+            <%@x = 0%>
+            <%@y = @infotypes.size - 1%>
+            <% for x in 0..@y %>
+            <span class="content"><%= link_to "#{@infotypes[@x].name}", @infotypes[@x],method: :get,name: @infotypes[@x].name%></span>
+            <% @x = @x + 1 %>
+            <%end%>
+          </ull>
+        </nav>
+      </div>
+</header>

@@ -1,0 +1,2 @@
+<p><% @chat = Chat.find(params[:id])%><% @friendship = Friendship.find(@chat.friendship_id)%>
+<% if @friendship.personone == current_user.id %><% @user = User.find(@friendship.personone)%><%= "The message is from #{@user.name}"%><br><%= "The content is: #{@chat.content}"%><% else %><% @user = User.find(@friendship.persontwo)%><%= "The message is from #{@user.name}"%><br><%= "The content is: #{@chat.content}"%><% end %></p>

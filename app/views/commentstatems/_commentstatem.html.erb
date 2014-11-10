@@ -1,0 +1,9 @@
+<br><% x = 0 %><% y = @commentstatems.size - 1 %><% z = @commentstatems %><% @m = @n = 0 %>
+<% while x <= y do %>
+<% if z[x].state == 'good' %>
+<% @m = @m + 1 %>
+<% else %>
+<% @n = @n + 1 %>
+<% end %>
+<% x = x + 1 %>
+<% end %>

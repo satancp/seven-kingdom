@@ -1,0 +1,42 @@
+<% provide(:title, "Edit user") %> 
+<h1>Update your profile</h1>
+<%= form_for(@user) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+
+          <%= f.label :name %>
+          <br>
+          <%= f.text_field :name %>
+          <br>
+          <%= f.label :email %>
+          <br>
+          <%= f.text_field :email %>
+          <br>
+          <%= f.label :gender %>
+          <br>
+          Male
+          <%= f.radio_button :gender, 'Male', :checked => true %>
+          <br>
+          Female
+          <%= f.radio_button :gender, 'Female' %> 
+          <br>
+          <%= f.label :age %>
+          <br>
+          <%= f.text_field :age %>
+          <br>
+          <%= f.label :favourite %>
+          <br>
+          <%= f.select(:love, Infotype.all.collect {|p| [ p.name, p.id ] }, 
+                                           { :multiple => false, :size => 5 }) %>
+          <br>
+          <%= f.label :password %>
+          <br>
+          <%= f.password_field :password %>
+          <br>
+          <%= f.label :password_confirmation, "Confirmation" %>
+          <br>
+          <%= f.password_field :password_confirmation %>
+          
+          <%= f.hidden_field :power, :value => 'user' %>
+          <br>
+      <%= f.submit "Save changes",class: "btn btn-large btn-primary"  %>
+<% end %>

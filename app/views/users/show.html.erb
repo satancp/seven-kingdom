@@ -1,0 +1,64 @@
+<% provide(:title, @user.name) %>
+<% if current_user?(@user)%>
+    <div class="row">
+      <aside class="span4">
+        <section>
+          <h1>
+            <%= @user.name %>
+          </h1>
+          <h2><% if @user.avatar_file_name != nil%>
+            <%= image_tag @user.avatar.url(:thumb) %>
+            <% end %>
+          </h2>
+        </section>
+        <section>
+        <%= "Age:#{@user.age}" %>
+        </section>
+        <section>
+        <%= "Gender:#{@user.gender}" %>
+        </section>
+        <section>
+        <%= "Email:#{@user.email}" %>
+        </section>
+        <section>
+        <% @love = Infotype.find(@user.love) %>
+        <%= "Favourite:#{@love.name}" %>
+        </section>
+        <section>
+        <%= render 'uploads/upload' %>
+        </section>
+      </aside>
+      <div class="span8">
+        <% if @user.microposts.any? %>
+          
+          <ol class="microposts">
+          <h3>Microposts (<%= @user.microposts.count %>)</h3>
+            <%= render @microposts %><xq><%= will_paginate @microposts%></xq>
+          </ol>
+        <% end %>
+      </div>
+    </div> 
+    <% else %>
+    <div class="span8"><div class="row">
+      <aside class="span4">
+        <section>
+          <h1>
+          <% @h = Friendship.where(:personone => current_user.id,:persontwo => @user.id)%>
+          <% @j = Friendship.where(:personone => @user.id,:persontwo => current_user.id)%>
+            <%= @user.name %></h1><br><h2><% if @user.avatar_file_name != nil%>
+            <%= image_tag @user.avatar.url(:thumb) %>
+            <% end %><% if @h == [] and @j == [] %><%= form_for(State.new) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.hidden_field :personone ,:value => current_user.id %>
+        <%= f.hidden_field :persontwo ,:value => @user.id %>
+        <%= f.submit "Add to friend list", class: "btn btn-small btn-primary" %>
+        <% end %><% end %>
+          </h2></section></aside></div>
+        <% if @user.microposts.any? %>
+          
+          <h3>Microposts (<%= @user.microposts.count %>)</h3>
+           <bv><%= render @microposts %><%= will_paginate @microposts%></bv>
+
+        <% else %><%= "No micropost here." %><% end %>
+      </div>
+    <% end %>

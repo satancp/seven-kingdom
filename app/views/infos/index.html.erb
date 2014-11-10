@@ -1,0 +1,28 @@
+<% provide(:title, 'Infos') %>
+    <div class="row">
+      <aside class="span4">
+      <cc><br>
+        <%= form_tag infos_path, :method => 'get', :id => "infos_search" do %>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag " Search information by title ", :name => nil %>
+        <% end %></cc>
+        <section>
+          <h1>
+            <% @x = 0 %>
+            <% @y = @info.size - 1 %>
+            <br>
+            <% for @x in 0..@y %>
+      <li id = "result"><%= link_to "#{@info[@x].title}   ", @info[@x],method: :get,title: @info[@x].title%><% @c = @info[@x].infotype_id %><%= Infotype.find(@c).name %><br>
+       </li>
+      <% @x = @x + 1 %>
+      <%end%>
+          </h1>
+
+        </section>
+        
+      </aside>
+      <div class="span8">
+
+      </div>
+
+    </div> 

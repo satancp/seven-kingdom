@@ -1,0 +1,67 @@
+      <div class="center hero-unit">
+      <% if signed_in? %>
+            <div class="row">
+        <aside class="span4">
+          <ulll>
+            <%= render 'shared/user_info' %>
+<br>
+
+            <%= render 'shared/micropost_form' %>
+</ulll>
+        </aside>
+        
+      </div> <xx>        <h1>Favourite</h1>
+        <h2>
+        <% @user = current_user %>
+        <% @infotype = @user.love %>
+        <% @info = Info.find_by_infotype_id(@infotype)%>
+        <% if @info != nil %>
+        <span class="content"><%= link_to "#{@info.title}", @info,method: :get,title: @info.title%></span>
+          
+        </h2>
+        <% end %></xx>
+         <yy>
+        <% if @c != 0 %>
+        <dd>The most popular!<br>
+        <%= Infotype.find(@c).name %></dd>
+        <cc>
+        <% @info = Info.where(:infotype_id => @c) %>
+        <% x = 0 %>
+        <% if @info.count <= 2 %>
+        <% y = @info.size - 1 %>
+        <% else %>
+        <% y = 2 %>
+        <% end %>
+        <% for x in 0..y %>
+        <span class="content"><%= link_to "#{@info[x].title}", @info[x],method: :get,title: @info[x]%><% x = x + 1 %><% end %></span></cc>
+        <% end %></yy><qq><cc>
+        <%= form_tag infos_path, :method => 'get', :id => "infos_search" do %>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag " Search information by title ", :name => nil %>
+        <% end %></cc></qq>
+        <% else %>
+        <% if @c != 0 %>
+        <dd>The most popular!<br>
+        <%= Infotype.find(@c).name %></dd>
+        <cc>
+        <% @info = Info.where(:infotype_id => @c) %>
+        <% x = 0 %>
+        <% if @info.count <= 2 %>
+        <% y = @info.size - 1 %>
+        <% else %>
+        <% y = 2 %>
+        <% end %>
+        <% for x in 0..y %>
+        <span class="content"><%= link_to "#{@info[x].title}", @info[x],method: :get,title: @info[x]%><% x = x + 1 %><% end %></span></cc>
+        <% end %><cc>
+        <%= form_tag infos_path, :method => 'get', :id => "infos_search" do %>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag " Search information by title ", :name => nil %>
+        <% end %></cc>
+        <% end %>
+        
+      </div>
+
+        
+
+

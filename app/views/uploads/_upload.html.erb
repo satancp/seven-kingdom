@@ -1,0 +1,7 @@
+<%= form_for @user, :url => '#', :html => { :multipart => true } do |form| %>
+  <br>
+  Please input the image as head portrait
+  <%= form.file_field :avatar %>
+  <br>
+  <%= form.submit "Upload it", class: "btn btn-large btn-primary" %>
+<% end %>

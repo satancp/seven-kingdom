@@ -1,0 +1,17 @@
+       <p> <% if signed_in? %><% @signal = Commentstate.where(:user_id => @user.id,:info_id => @info.id) %>
+        <% if not @signal.any? %>
+        <%= form_for(Commentstate.new) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+          <br>
+          Good
+          <%= f.radio_button :state, 'good', :checked => true %>
+          <br>
+          Bad
+          <%= f.radio_button :state, 'bad' %>
+          <br>
+          <%= f.hidden_field :info_id, :value => @info.id %>
+          <br>
+          <%= f.submit "Submit", class: "btn btn-small btn-primary" %>
+          <% end %>
+        <% end %>
+        <% end %></p>

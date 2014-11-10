@@ -1,0 +1,32 @@
+<% provide(:title, 'Requests') %>
+    <div class="row">
+      <aside class="span4">
+        <section>
+          <h1><% if @state.any? %>
+          <% @x = 0 %>
+            <% @y = @state.size - 1 %>
+            <br>
+            <% for @x in 0..@y %>
+<% @z = @state[@x].personone %><% @m = @state[@x].persontwo %><%= User.find(@z).name %>
+        <%= form_for(Friendship.new) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.hidden_field :personone ,:value => @z %>
+        <%= f.hidden_field :persontwo ,:value => @m %>
+        <%= f.submit "Accept", class: "btn btn-success btn-primary"%><%= link_to "Reject", @state[@x], method: :delete, class: "btn btn-large btn-primary"%>
+        <% end %>
+        
+
+      <% @x = @x + 1 %>
+      <%end%>
+          <% else %>
+            <p><%= "Don't be shy~" %><br><%= "Try to have a friend~"%></p><% end %>
+          </h1>
+
+        </section>
+        
+      </aside>
+      <div class="span8">
+
+      </div>
+
+    </div> 

@@ -1,0 +1,18 @@
+
+       <p> <% if signed_in? %><% @signal = Commentstatem.where(:user_id => current_user.id,:micropost_id => @micropost.id) %>
+        <% if not  @signal.any? %>
+        <%= form_for(Commentstatem.new) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+          <br>
+          Good
+          <%= f.radio_button :state, 'good', :checked => true %>
+          <br>
+          Bad
+          <%= f.radio_button :state, 'bad' %>
+          <br>
+          <%= f.hidden_field :micropost_id, :value => @micropost.id %>
+          <br>
+          <%= f.submit "Submit", class: "btn btn-small btn-primary" %>
+          <% end %>
+        <% end %>
+        <% end %></p>
